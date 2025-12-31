@@ -1,6 +1,7 @@
 import json
 import requests
 import os
+import random
 from google.cloud import storage
 url = os.environ.get('REQUEST_URL')
 endpoint = os.environ.get('REQUEST_ENDPOINT')
@@ -32,13 +33,14 @@ def transform_dogs():
             output = []
             for index,breed_name in enumerate(dog_breeds):
                 output.append({'breed':breed_name,'sub_breeds':data['message'][dog_breeds[index]]})
+            output.append({'breed':'UNKNOWN','sub_breeds':[str(random.randint(1, 10000)),str(random.randint(1, 10000))]}
             with open('transactions.json','w',encoding='utf-8') as f:
                 for i in output:
                     json.dump(i,f)
                     f.write('\n')
                 f.close()
                 file_path = 'automated_load'
-                file_name = 'transactions.json'
+                file_name = 'dogs.json'
                 gcp_storage_client = storage.Client(storage_client)
                 gcp_storage_bucket = gcp_storage_client.bucket(storage_bucket)
                 file_upload = gcp_storage_bucket.blob(file_path + '/' + file_name)
