@@ -29,7 +29,6 @@ def transform_dogs():
             output = []
             for index,breed_name in enumerate(dog_breeds):
                 output.append({'breed':breed_name,'sub_breeds':data['message'][dog_breeds[index]]})
-            return output
             print(output)
             print('test')
         except:
