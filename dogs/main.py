@@ -1,7 +1,7 @@
 import json
 import requests
 import os
-url = os.enviorn.get('REQUEST_URL')
+url = os.environ.get('REQUEST_URL')
 endpoint = os.environ.get('REQUEST_ENDPOINT')
 
 def get_data(url,endpoint):
