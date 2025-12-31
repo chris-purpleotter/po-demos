@@ -33,7 +33,7 @@ def transform_dogs():
             output = []
             for index,breed_name in enumerate(dog_breeds):
                 output.append({'breed':breed_name,'sub_breeds':data['message'][dog_breeds[index]]})
-            output.append({'breed':'UNKNOWN','sub_breeds':[str(random.randint(1, 10000)),str(random.randint(1, 10000))]}
+            output.append({'breed':'UNKNOWN','sub_breeds':[str(random.randint(1, 10000)),str(random.randint(1, 10000))]})
             with open('transactions.json','w',encoding='utf-8') as f:
                 for i in output:
                     json.dump(i,f)
