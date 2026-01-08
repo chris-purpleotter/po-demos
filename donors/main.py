@@ -13,7 +13,7 @@ def get_data(url,endpoint):
         response.raise_for_status()
         data = []
         for line in response.iter_lines():
-          if line:  # check if line is not empty
+          if line:
             data.append(json.loads(line))
         return data
         print(f"Successfully fetched data from {url}{endpoint}.")
