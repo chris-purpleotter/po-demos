@@ -28,8 +28,8 @@ def post_data():
       output = []
       for i in data:
         for id, details in i.items():
-        entry = {"account_id":id,"donor_level":details.get("donor_level"),"l5_amounts":details.get("l5_amounts",[])}
-        output.append(entry)
+            entry = {"account_id":id,"donor_level":details.get("donor_level"),"l5_amounts":details.get("l5_amounts",[])}
+            output.append(entry)
       with open('donations.json','w',encoding='utf-8') as f:
         for i in output:
           json.dump(i,f)
