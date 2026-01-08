@@ -1,3 +1,6 @@
+[tool.setuptools]
+packages = ["dogs", "donors"]
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
