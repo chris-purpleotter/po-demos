@@ -34,14 +34,14 @@ def post_data():
         for i in output:
               json.dump(i,f)
               f.write('\n')
-          f.close()
-          file_path = 'automated_load'
-          file_name = 'donations.json'
-          gcp_storage_client = storage.Client(storage_client)
-          gcp_storage_bucket = gcp_storage_client.bucket(storage_bucket)
-          file_upload = gcp_storage_bucket.blob(file_path + '/' + file_name)
-          file_upload.upload_from_filename(file_name)    
-          print(output)
+        f.close()
+        file_path = 'automated_load'
+        file_name = 'donations.json'
+        gcp_storage_client = storage.Client(storage_client)
+        gcp_storage_bucket = gcp_storage_client.bucket(storage_bucket)
+        file_upload = gcp_storage_bucket.blob(file_path + '/' + file_name)
+        file_upload.upload_from_filename(file_name)    
+        print(output)
     except:
       print("Error creating output.")
       raise
