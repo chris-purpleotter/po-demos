@@ -1,5 +1,5 @@
 [tool.setuptools]
-packages = ["dogs", "donors"]
+packages = ["donors"]
 
 [build-system]
 requires = ["setuptools"]
