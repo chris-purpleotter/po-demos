@@ -13,7 +13,7 @@ _Note: Below are solutions we've explored so far. Unexplored alternatives, for b
 | :-                                        | :-                                                                                  | :-                                                                          | :-
 | Salesforce Data Federation                | Native integration. Data stored in one place. Real-time data. No schema drift.      |                                                                             | Data is directly queried through BigQuery.
 | BigQuery Data Transfer Service            | Native integration. Scheduled updates as frequently as needed.                      | Data stored in multiple places. Schema drift management.                    | Data is copied directly to BigQuery tables. Data Transfer for Hubspot is in preview (beta).
-| Hubspot Data Hub Sync                     | Native integration. No schema drift.                                                | Beta integration. Only daily updates. Data stored in mulitple places.       | Data is copied as parquet files to GCP storage.
+| Hubspot Data Hub Sync                     | Native integration. No schema drift.                                                | Beta integration. Only daily updates. Data stored in multiple places.       | Data is copied as parquet files to GCP storage.
 | Python + Cloud Run                        | Scheduled updates as frequently as needed.                                          | Custom integration. CI/CD management.                                       | Can run any containerized application (JS, Ruby, Java, etc).
 
 ## Demo Use Case
