@@ -1,6 +1,26 @@
-# po-demos
+# Purple Otter Data Integration Demos
+_Note: Below are solutions we've explored so far. Unexplored alternatives, for better or worse, may exist._
 # GCP
-## Prerequisites
+## Data Integration
+| Source System             | Method
+| :-                        | :-
+| Salesforce                | Salesforce Data Federation or BigQuery Data Transfer Service.
+| Hubspot                   | BigQuery Data Transfer Service or Hubspot Data Hub Sync
+| Generic JSON/CSV          | Python + Cloud Run
+| SFTP                      | Python + Cloud Run
+
+| Method                                    | Pros                                                                                | Cons                                                                        | Notes
+| :-                                        | :-                                                                                  | :-                                                                          | :-
+| Salesforce Data Federation                | Native integration. Data stored in one place. Real-time data. No schema drift.      |                                                                             | Data is directly queried through BigQuery.
+| BigQuery Data Transfer Service            | Native integration. Scheduled updates as frequently as needed.                      | Data stored in multiple places. Schema drift management.                    | Data is copied directly to BigQuery tables. Data Transfer for Hubspot is in preview (beta).
+| Hubspot Data Hub Sync                     | Native integration. No schema drift.                                                | Beta integration. Only daily updates. Data stored in mulitple places.       | Data is copied as parquet files to GCP storage.
+| Python + Cloud Run                        | Scheduled updates as frequently as needed.                                          | Custom integration. CI/CD management.                                       | Can run any containerized application (JS, Ruby, Java, etc).
+
+## Demo Use Case
+- Ingest data from salesforce account object and raw JSON file.
+- Transform data into BI ready production tables.
+- Provide a solution using low-cost IaaS resources.
+###  Prerequisites
 - Cloud Storage Bucket
 - Cloud Scheduler
 - Cloud Run
@@ -9,7 +29,7 @@
 - Dataform
 - Python
 - GitHub Repo
-## Process Overview
+### Solution Overview
 ```mermaid
 ---
 config:
@@ -55,21 +75,39 @@ flowchart TB
 ```
 
 # Azure
+## Data Integration
+| Source System             | Method
+| :-                        | :-
+| Salesforce                | Salesforce Data Federation or Azure Data Factory - Copy Data Activity
+| Hubspot                   | Azure Data Factory - Copy Data Activity
+| Generic JSON/CSV          | Azure Data Factory - Copy Data Activity
+| SFTP                      | Azure Data Factory - Copy Data Activity
+
+
+| Method                                    | Pros                                                                                      | Cons                                                                        | Notes
+| :-                                        | :-                                                                                        | :-                                                                          | :-
+| Salesforce Data Federation                | Native integration. Data stored in one place. Real-time data. No schema drift.            | Requires dedicated SQL pool (expensive).                                    | Likely better off using Microsoft Fabric.
+| Azure Data Factory - Copy Data Activity   | Native integration. Scheduled updates as frequently as needed. No schema drift.           | Data stored in multiple places.                                             | Data is copied as parquet/json/csv files to Azure storage blob. Hubspot integration does not support custom objects.
+
+## Demo Use Case
+- Ingest data from salesforce account object and raw JSON file.
+- Transform data into BI ready production tables.
+- Provide a solution using low-cost IaaS resources.
 ## Prerequisites
 - Azure Data Factory
 - Azure Synapse Analytics
-    - Serverless SQL Pool
+- Serverless SQL Pool
 - Azure Storage Blob
-## Process Overview
+### Solution Overview
 ```mermaid
 ---
 config:
   theme: 'neutral'
 ---
 flowchart TB
-    synapse_raw@{ shape: cyl, label: "Synapse Serverless SQL (Raw)"}
+    synapse_raw@{ shape: cyl, label: "Synapse Serverless SQL \n (Raw)"}
         style synapse_raw fill: #CD7F32, stroke-width:5px
-    synapse_prod@{ shape: cyl, label: "Synapse Serverless SQL (Prod)"}
+    synapse_prod@{ shape: cyl, label: "Synapse Serverless SQL \n (Prod)"}
         style synapse_prod fill: #FFD700, stroke-width:5px
     sf@{ shape: cyl, label: "Salesforce Object" }
     trx@{ shape: cyl, label: "JSON from API"}
