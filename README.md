@@ -17,6 +17,7 @@ _Note: Below are solutions we've explored so far. Unexplored alternatives, for b
 | Python + Cloud Run                        | Scheduled updates as frequently as needed.                                          | Custom integration. CI/CD management.                                       | Can run any containerized application (JS, Ruby, Java, etc).
 
 ## Demo Use Case
+- _Ping Chris for access._
 - Ingest data from salesforce account object and raw JSON file.
 - Transform data into BI ready production tables.
 - Provide a solution using low-cost IaaS resources.
@@ -90,6 +91,7 @@ flowchart TB
 | Azure Data Factory - Copy Data Activity   | Native integration. Scheduled updates as frequently as needed. No schema drift.           | Data stored in multiple places.                                             | Data is copied as parquet/json/csv files to Azure storage blob. Hubspot integration does not support custom objects.
 
 ## Demo Use Case
+- _Ping Chris for access._
 - Ingest data from salesforce account object and raw JSON file.
 - Transform data into BI ready production tables.
 - Provide a solution using low-cost IaaS resources.
