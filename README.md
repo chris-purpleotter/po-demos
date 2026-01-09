@@ -5,9 +5,9 @@ _Note: Below are solutions we've explored so far. Unexplored alternatives, for b
 | Source System             | Method
 | :-                        | :-
 | Salesforce                | Salesforce Data Federation or BigQuery Data Transfer Service.
-| Hubspot                   | BigQuery Data Transfer Service or Hubspot Data Hub Sync
-| Generic JSON/CSV          | Python + Cloud Run
-| SFTP                      | Python + Cloud Run
+| Hubspot                   | BigQuery Data Transfer Service or Hubspot Data Hub Sync.
+| Generic JSON/CSV          | Python + Cloud Run.
+| SFTP                      | Python + Cloud Run.
 
 | Method                                    | Pros                                                                                | Cons                                                                        | Notes
 | :-                                        | :-                                                                                  | :-                                                                          | :-
@@ -79,10 +79,10 @@ flowchart TB
 ## Data Integration
 | Source System             | Method
 | :-                        | :-
-| Salesforce                | Salesforce Data Federation or Azure Data Factory - Copy Data Activity
-| Hubspot                   | Azure Data Factory - Copy Data Activity
-| Generic JSON/CSV          | Azure Data Factory - Copy Data Activity
-| SFTP                      | Azure Data Factory - Copy Data Activity
+| Salesforce                | Salesforce Data Federation or Azure Data Factory - Copy Data Activity.
+| Hubspot                   | Azure Data Factory - Copy Data Activity.
+| Generic JSON/CSV          | Azure Data Factory - Copy Data Activity.
+| SFTP                      | Azure Data Factory - Copy Data Activity.
 
 
 | Method                                    | Pros                                                                                      | Cons                                                                        | Notes
