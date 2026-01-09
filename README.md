@@ -148,3 +148,6 @@ flowchart TB
     synapse_raw --> as_pipeline1
     synapse_prod --> bi
 ```
+### Notes
+- You can use a the Dataflow service to achieve a lot of the same results but it runs on spark notebooks which can be pretty expensive.
+- If we were using very large datasets that may be justified but for the small scale of our data it was more cost effective to use pipeline activities + SQL scripts.
