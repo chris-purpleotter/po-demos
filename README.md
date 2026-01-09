@@ -1,5 +1,15 @@
 # po-demos
-# GCP Process
+# GCP
+## Prerequisites
+- Cloud Storage Bucket
+- Cloud Scheduler
+- Cloud Run
+- BigQuery
+- Datatransfer
+- Dataform
+- Python
+- GitHub Repo
+## Process Overview
 ```mermaid
 ---
 config:
@@ -44,7 +54,13 @@ flowchart TB
     bq_prod --> bi
 ```
 
-# Azure Process
+# Azure
+## Prerequisites
+- Azure Data Factory
+- Azure Synapse Analytics
+    - Serverless SQL Pool
+- Azure Storage Blob
+## Process Overview
 ```mermaid
 ---
 config:
