@@ -46,9 +46,14 @@ flowchart TB
     trx@{ shape: cyl, label: "JSON from API"}
     data_transfer@{ shape: process, label: "Data Transfer Service"}
     dataform@{ shape: processes, label: "Dataform"}
+    dbt@{ shape: processes, label: "dbt"}
+    dbt_pull@{ shape: process, label: "Pull Request"}
+    dbt_cloud_build@{ shape: process, label: "Cloud Build"}
+    dbt_cloud_run@{ shape: process, label: "Cloud Run \n Job"}
+    dbt_cloud_scheduler@{ shape: process, label: "Cloud Scheduler"}
     cloud_scheduler@{ shape: process, label: "Cloud Scheduler"}
     pubsub@{ shape: process, label: "Pub/Sub Message"}
-    cloud_run@{ shape: process, label: "Cloud Run"}
+    cloud_run@{ shape: process, label: "Cloud Run \n Function"}
     python@{ shape: lean-r, label: "Python Script \n (GitHub Hosted)"}
     bi@{ shape: docs, label: "Data Studio Reporting" }
     spacer[ ]
@@ -66,12 +71,23 @@ flowchart TB
         bq_raw --- |_directly queries via external table_| gcp_store
     end
 
-    subgraph transformation["Data Transformation"]
+    subgraph transformation1["Data Transformation - Dataform"]
         spacer ~~~ dataform
         dataform --> |_scheduled sql scripts_| bq_prod
     end
 
+    subgraph transformation2["Data Transformation - dbt"]
+        spacer ~~~ dbt_pull
+        dbt_pull --> | initiates | dbt_cloud_build
+        dbt_cloud_build --> | containerizes | dbt
+        dbt_cloud_scheduler --> | initiates | dbt_cloud_run
+        dbt_cloud_run --> | runs | dbt
+        dbt --> bq_prod
+
+    end
+
     bq_raw --> dataform
+    bq_raw --> dbt
     bq_prod --> bi
 ```
 
