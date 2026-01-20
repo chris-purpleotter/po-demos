@@ -167,3 +167,60 @@ flowchart TB
 ### Notes
 - You can use a the Dataflow service to achieve a lot of the same results but it runs on spark notebooks which can be pretty expensive.
 - If we were using very large datasets that may be justified but for the small scale of our data it was more cost effective to use pipeline activities + SQL scripts.
+
+# Marketing Attribution
+## Tactical Attribution Modeling
+- Single-Touch (STA)
+    - Last-Touch, First-Touch.
+- Multi-Touch (MTA)
+    - Rules based.
+    - Linear, Time Decay, Position Based.
+- Data-Driven & Algorithmic (DDA)
+    - Black box process.
+- Incremental Testing
+    - Brand/Conversion Lift Testing.
+## Marketing Mix Modeling (MMM)
+- Strategic modeling used to complement tactical modeling above.
+- Determine how much each marketing channel contributes to an outcome.
+- Identify channels to scale.
+- Typically regression modeling sometimes bayesian modeling.
+### MMM w/ BigQuery
+- Linear Regression Model
+    ```
+    CREATE OR REPLACE MODEL `mktg.mmm`
+    OPTIONS (
+        model_type = 'linear_reg',
+        input_label_cols = ['log_donations']
+    ) AS
+    {{ SELECT columns }}
+    {{ FROM dataset }}
+    ```
+- Model Evaluation:
+    - Mean Abolute Error:
+        - Average difference between predicted and actual values.
+        - Lower is better.
+    - R squared:
+        - Proportion of variance explained by model.
+        - 0 to 1.
+        - Higher is better.
+        - Aim for > 0.25  and < 0.80 as > 0.80 can be a sign of overfitting in a marketing context.
+    - Use below query to see how each input variable contributes to the output variable.
+    ```sql
+    SELECT * FROM ML.WEIGHTS(MODEL mktg.mmm)
+    ```
+    - Example
+        | Variable            | Value                
+        | :-                  | :- 
+        | log_spend_channel_a | 0.0938 
+        | log_spend_channel_b | 0.0993  
+        | log_spend_channel_c | 0.0930  
+        | log_spend_channel_d | 0.1319
+    - Channel D is strongest performer.
+    - Each 1% increase in spend for this channel can increase outcomes by 0.13%.
+
+# K-Means Modeling
+- Partition data into clusters where points in one cluster are different from another.
+- Requires continuous numerical data. Non-continuous data can be converted.
+- BigQuery automatically handles conversion of categorical columns into numerical representations.
+- BigQuery ML automatically standardizes numerical data for K-means models.
+- Requires a data structure where one row represents and observation and each column represents a characteristic of that observation.
